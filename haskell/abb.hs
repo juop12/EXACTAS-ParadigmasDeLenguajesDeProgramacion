@@ -23,13 +23,15 @@ quitar (Bin izq raiz der) valor
 quitar_raiz :: (Ord a) => ABB a -> ABB a
 quitar_raiz (Bin Nil _ der) =  der
 quitar_raiz (Bin izq _ Nil) =  izq
-quitar_raiz (Bin izq _ der) =  (Bin (quitar izq nuevo_valor) nuevo_valor der) -- Necesito borrar el elemento que busco en el abb izq
+quitar_raiz (Bin izq _ der) =  Bin nuevo_izq nuevo_valor der -- Necesito borrar el elemento que busco en el abb izq
     where
-        nuevo_valor = elemento_mas_grande izq
+        (nuevo_izq, nuevo_valor) = extraer_maximo izq
 
-elemento_mas_grande :: (Ord a) => ABB a -> a
-elemento_mas_grande (Bin _ raiz Nil) = raiz 
-elemento_mas_grande (Bin _ _ der) = elemento_mas_grande der
+extraer_maximo :: (Ord a) => ABB a -> (ABB a, a)
+extraer_maximo (Bin izq raiz Nil) = (izq, raiz) 
+extraer_maximo (Bin izq raiz der) = (Bin izq raiz nueva_der, nuevo_valor)
+    where 
+        (nueva_der, nuevo_valor) = extraer_maximo der
 
 preorder :: ABB a -> [a]
 preorder Nil = []
@@ -51,3 +53,4 @@ postorder (Bin izq raiz der) = postorder izq ++ (postorder der ++ [raiz])
     -- Agrego funcion quitar.
     -- Fue un dolor de cabeza pensar tan recursivamente con Haskell. Estoy por estallar
     -- La gracia del ejercicio de quitar es reemplazar el nodo o valor quitado y conservar los hijos actualizados. Es decir, en este caso el elemento eliminado se tiene que reemplazar con el más grande de su arbol Izq. Para esto se busca el elemento mas grande de dicho arbol y se lo reemplaza en el nodo que se va a eliminar. Además, se actualiza el arbol Izq para borrar este nodo. Si el arbol Izq es Nil, se reemplaza con el arbol Der. 
+    -- Mejoro el TDA haciendo que al buscar reemplazar el nodo a eliminar con el predecesor inorder, con 1 sola busqueda se pueda actualizar el arbol Izq eliminando correctamente el precedesor inorder de este y conseguir el valor del predecesor inorder.
