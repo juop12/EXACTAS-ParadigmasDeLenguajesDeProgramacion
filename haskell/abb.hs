@@ -18,20 +18,23 @@ quitar Nil _ = Nil
 quitar (Bin izq raiz der) valor
     | valor < raiz = Bin (quitar izq valor) raiz der
     | valor > raiz = Bin izq raiz (quitar der valor)
-    | valor == raiz = quitar_raiz (Bin izq raiz der)
+    | valor == raiz = quitarRaiz (Bin izq raiz der)
 
-quitar_raiz :: (Ord a) => ABB a -> ABB a
-quitar_raiz (Bin Nil _ der) =  der
-quitar_raiz (Bin izq _ Nil) =  izq
-quitar_raiz (Bin izq _ der) =  Bin nuevo_izq nuevo_valor der -- Necesito borrar el elemento que busco en el abb izq
+quitarRaiz :: (Ord a) => ABB a -> ABB a
+quitarRaiz (Bin Nil _ der) =  der
+quitarRaiz (Bin izq _ Nil) =  izq
+quitarRaiz (Bin izq _ der) =  Bin nuevo_izq nuevo_valor der -- Necesito borrar el elemento que busco en el abb izq
     where
-        (nuevo_izq, nuevo_valor) = extraer_maximo izq
+        (nuevo_izq, nuevo_valor) = extraerMaximo izq
 
-extraer_maximo :: (Ord a) => ABB a -> (ABB a, a)
-extraer_maximo (Bin izq raiz Nil) = (izq, raiz) 
-extraer_maximo (Bin izq raiz der) = (Bin izq raiz nueva_der, nuevo_valor)
+extraerMaximo :: (Ord a) => ABB a -> (ABB a, a)
+extraerMaximo (Bin izq raiz Nil) = (izq, raiz) 
+extraerMaximo (Bin izq raiz der) = (Bin izq raiz nueva_der, nuevo_valor)
     where 
-        (nueva_der, nuevo_valor) = extraer_maximo der
+        (nueva_der, nuevo_valor) = extraerMaximo der
+
+arrayToABB :: (Ord a) => [a] -> ABB a
+arrayToABB x = undefined
 
 preorder :: ABB a -> [a]
 preorder Nil = []
