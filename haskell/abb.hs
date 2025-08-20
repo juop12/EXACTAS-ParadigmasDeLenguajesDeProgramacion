@@ -1,3 +1,4 @@
+module Abb where
 
 -- Defino el tipo de dato abstracto (TDA) de Arbol Binario de Busqueda
 data ABB a = Nil | Bin (ABB a) a (ABB a) deriving Show

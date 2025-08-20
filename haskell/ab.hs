@@ -1,3 +1,5 @@
+module Ab where
+
 data AB a = Nil | Bin (AB a) a (AB a) deriving Show
 
 ab1 = Bin (Bin (Bin Nil 1 Nil) 3 Nil) 5 (Bin (Bin Nil 7 Nil) 8 (Bin Nil 9 Nil))
