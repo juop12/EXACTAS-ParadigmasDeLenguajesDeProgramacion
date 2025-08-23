@@ -137,9 +137,9 @@
 --------------------------------------------------------------------------------
 
 valorAbsoluto :: Float -> Float -- que dado un número devuelve su valor absoluto.
-valorAbsoluto valor 
+valorAbsoluto valor
     | valor < 0 = -valor
-    | otherwise = valor 
+    | otherwise = valor
 
 bisiesto :: Int -> Bool -- que dado un número que representa un año, indica si el mismo es bisiesto.
 bisiesto ano
@@ -155,7 +155,7 @@ cantDivisoresPrimos 1 = 1
 cantDivisoresPrimos n = length (filter esPrimo (divisores n))
     where
         divisores x = filter (\d -> x `mod` d == 0) [1..x]
-        esPrimo x = length (divisores x) == 2
+        esPrimo x = x == 1 || length (divisores x) == 2
 
 --------------------------------------------------------------------------------
 -- 3. Contamos con los tipos Maybe y Either definidos como sigue:
@@ -165,13 +165,12 @@ cantDivisoresPrimos n = length (filter esPrimo (divisores n))
 --------------------------------------------------------------------------------
 
 inverso :: Float -> Maybe Float -- que dado un número devuelve su inverso multiplicativo si está definido, o Nothing en caso contrario.
-inverso = undefined
-
+inverso 0 = Nothing
+inverso n = Just (1/n)
 
 aEntero :: Either Int Bool -> Int -- que convierte a entero una expresión que puede ser booleana o entera. En el caso de los booleanos, el entero que corresponde es 0 para False y 1 para True.
-aEntero = undefined
-
-
+aEntero (Left entero) = entero
+aEntero (Right boolean) = if boolean then 1 else 0
 
 --------------------------------------------------------------------------------
 -- 4. Definir las siguientes funciones sobre listas:
@@ -211,4 +210,6 @@ productoAB = undefined
     -- Reescribí todas las descripciones para que sean más claras y concisas.
 --------------------------------------------------------------------------------
     -- Agrego el resto de enunciados de la práctica 0 y se las deja listas para implementar.
-    
+    -- Termino ejercicio 2.
+    -- Arreglo ejercicio 2. Ahora cuenta a 1 en el conjunto de divisores primos ya que esPrimo no estaba tomando 1 como primo.
+    -- Termino ejercicio 3. Ahora entiendo el Either, el Maybe es un Option de Rust.
