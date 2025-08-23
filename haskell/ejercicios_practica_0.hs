@@ -137,16 +137,25 @@
 --------------------------------------------------------------------------------
 
 valorAbsoluto :: Float -> Float -- que dado un número devuelve su valor absoluto.
-valorAbsoluto = undefined
+valorAbsoluto valor 
+    | valor < 0 = -valor
+    | otherwise = valor 
 
 bisiesto :: Int -> Bool -- que dado un número que representa un año, indica si el mismo es bisiesto.
-bisiesto = undefined
+bisiesto ano
+    | (ano `mod` 4 == 0 && ano `mod` 100 /= 0) || (ano `mod` 400 == 0) = True
+    | otherwise = False
 
 factorial :: Int -> Int -- definida únicamente para enteros positivos, que computa el factorial.
-factorial = undefined
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
 
 cantDivisoresPrimos :: Int -> Int -- que dado un entero positivo devuelve la cantidad de divisores primos.
-cantDivisoresPrimos = undefined
+cantDivisoresPrimos 1 = 1
+cantDivisoresPrimos n = length (filter esPrimo (divisores n))
+    where
+        divisores x = filter (\d -> x `mod` d == 0) [1..x]
+        esPrimo x = length (divisores x) == 2
 
 --------------------------------------------------------------------------------
 -- 3. Contamos con los tipos Maybe y Either definidos como sigue:
