@@ -1,5 +1,4 @@
 module Abb where
-import Distribution.Compiler (AbiTag(NoAbiTag))
 
 -- Defino el tipo de dato abstracto (TDA) de Arbol Binario de Busqueda
 data ABB a = Nil | Bin (ABB a) a (ABB a) deriving Show
@@ -9,7 +8,7 @@ abb2 = Bin (Bin Nil (-1) (Bin Nil 0 (Bin Nil 1 Nil))) 1 (Bin (Bin Nil 2 Nil) 3 N
 
 insertar :: (Ord a) => ABB a -> a -> ABB a
 insertar Nil valor = Bin Nil valor Nil
-insertar (Bin izq raiz der) valor 
+insertar (Bin izq raiz der) valor
     | valor <= raiz = Bin (insertar izq valor) raiz der
     | valor > raiz = Bin izq raiz (insertar der valor)
  -- | otherwise = Bin l y r -- x == y, no change needed
@@ -30,23 +29,23 @@ quitarRaiz (Bin izq _ der) =  Bin nuevo_izq nuevo_valor der -- Necesito borrar e
         (nuevo_izq, nuevo_valor) = extraerMaximo izq
 
 extraerMaximo :: (Ord a) => ABB a -> (ABB a, a)
-extraerMaximo (Bin izq raiz Nil) = (izq, raiz) 
+extraerMaximo (Bin izq raiz Nil) = (izq, raiz)
 extraerMaximo (Bin izq raiz der) = (Bin izq raiz nueva_der, nuevo_valor)
-    where 
+    where
         (nueva_der, nuevo_valor) = extraerMaximo der
-
 
 buscar :: (Ord a) => ABB a -> a -> Maybe a
 buscar Nil _ = Nothing
-buscar (Bin Nil raiz Nil) valor 
+buscar (Bin Nil raiz Nil) valor
     | raiz /= valor = Nothing
-buscar (Bin izq raiz der) valor 
+    | raiz == valor = Just raiz
+buscar (Bin izq raiz der) valor
     | raiz > valor = buscar izq valor
     | raiz < valor = buscar der valor
     | raiz == valor = Just raiz
 
 arrayToABB :: (Ord a) => [a] -> ABB a
-arrayToABB x = undefined
+arrayToABB = foldl insertar Nil
 
 preorder :: ABB a -> [a]
 preorder Nil = []
@@ -70,3 +69,4 @@ postorder (Bin izq raiz der) = postorder izq ++ (postorder der ++ [raiz])
     -- La gracia del ejercicio de quitar es reemplazar el nodo o valor quitado y conservar los hijos actualizados. Es decir, en este caso el elemento eliminado se tiene que reemplazar con el más grande de su arbol Izq. Para esto se busca el elemento mas grande de dicho arbol y se lo reemplaza en el nodo que se va a eliminar. Además, se actualiza el arbol Izq para borrar este nodo. Si el arbol Izq es Nil, se reemplaza con el arbol Der. 
     -- Mejoro el TDA haciendo que al buscar reemplazar el nodo a eliminar con el predecesor inorder, con 1 sola busqueda se pueda actualizar el arbol Izq eliminando correctamente el precedesor inorder de este y conseguir el valor del predecesor inorder.
     -- Agrego la funcion buscar, que devuelve un Maybe a.
+    -- Agrego función para convertir un array en un ABB usando foldl.

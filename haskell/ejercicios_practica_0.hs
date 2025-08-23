@@ -1,0 +1,142 @@
+
+--------------------------------------------------------------------------------
+-- CHEATSHEET DE FUNCIONES PRELUDE
+-- 1. Dar el tipo y describir el comportamiento de las siguientes funciones del módulo Prelude de Haskell.
+--------------------------------------------------------------------------------
+
+-- null :: Foldable t => t a -> Bool
+    -- Devuelve True si la lista está vacía, False en caso contrario.
+-- head :: GHC.Stack.Types.HasCallStack => [a] -> a 
+    -- Devuelve el primer elemento de una lista no vacía.
+-- tail :: GHC.Stack.Types.HasCallStack => [a] -> [a]
+    -- Devuelve la lista sin su primer elemento.
+-- init :: GHC.Stack.Types.HasCallStack => [a] -> [a]
+    -- Devuelve la lista sin su último elemento.
+-- last :: GHC.Stack.Types.HasCallStack => [a] -> a
+    -- Devuelve el último elemento de una lista no vacía.
+-- length :: Foldable t => t a -> Int
+    -- Devuelve la cantidad de elementos en una lista.
+-- take :: Int -> [a] -> [a]
+    -- Devuelve los primeros n elementos de una lista.
+-- drop :: Int -> [a] -> [a]
+    -- Devuelve la lista sin sus primeros n elementos.
+-- (++) :: [a] -> [a] -> [a]
+    -- Concatena dos listas.
+-- concat :: Foldable t => t [a] -> [a]
+    -- Concatena una lista de listas en una sola lista.
+-- reverse :: [a] -> [a]
+    -- Devuelve la lista en orden inverso. 
+-- elem :: (Foldable t, Eq a) => a -> t a -> Bool
+    -- Devuelve True si el elemento pertenece a la lista, False en caso contrario.
+
+-- Extra hecho por Copilot con el formato que empece previamente:
+
+-- notElem :: (Foldable t, Eq a) => a -> t a -> Bool
+    -- Devuelve True si el elemento no pertenece a la lista, False en caso contrario.
+-- zip :: [a] -> [b] -> [(a, b)]
+    -- Toma dos listas y devuelve una lista de pares, donde el i-ésimo par contiene el i-ésimo elemento de cada una de las listas.
+-- unzip :: [(a, b)] -> ([a], [b])
+    -- Toma una lista de pares y devuelve un par de listas, donde la primera lista contiene los primeros elementos de cada par y la segunda lista contiene los segundos elementos de cada par.
+-- sum :: (Foldable t, Num a) => t a -> a
+    -- Devuelve la suma de los elementos de una lista.
+-- product :: (Foldable t, Num a) => t a -> a
+    -- Devuelve el producto de los elementos de una lista.
+-- maximum :: (Foldable t, Ord a) => t a -> a
+    -- Devuelve el máximo elemento de una lista no vacía.
+-- minimum :: (Foldable t, Ord a) => t a -> a
+    -- Devuelve el mínimo elemento de una lista no vacía.
+-- and :: Foldable t => t Bool -> Bool
+    -- Devuelve True si todos los elementos de la lista son True, False en caso contrario.
+-- or :: Foldable t => t Bool -> Bool
+    -- Devuelve True si al menos un elemento de la lista es True, False en caso contrario.
+-- any :: Foldable t => (a -> Bool) -> t a -> Bool
+    -- Devuelve True si al menos un elemento de la lista cumple con la condición dada, False en caso contrario.
+-- all :: Foldable t => (a -> Bool) -> t a -> Bool
+    -- Devuelve True si todos los elementos de la lista cumplen con la condición dada, False en caso contrario.
+-- concatMap :: Foldable t => (a -> [b]) -> t a -> [b]
+    -- Aplica una función a cada elemento de la lista y concatena los resultados en una sola lista.
+-- foldr :: (a -> b -> b) -> b -> [a] -> b
+    -- Aplica una función binaria a los elementos de la lista, desde la derecha, acumulando un resultado.
+-- foldl :: (b -> a -> b) -> b -> [a] -> b
+    -- Aplica una función binaria a los elementos de la lista, desde la izquierda, acumulando un resultado.
+-- foldr1 :: (a -> a -> a) -> [a] -> a
+    -- Aplica una función binaria a los elementos de la lista, desde la derecha, acumulando un resultado. La lista no debe ser vacía.
+-- foldl1 :: (a -> a -> a) -> [a] -> a
+    -- Aplica una función binaria a los elementos de la lista, desde la izquierda, acumulando un resultado. La lista no debe ser vacía.
+-- scanr :: (a -> b -> b) -> b -> [a] -> [b]
+    -- Similar a foldr, pero devuelve una lista de los resultados intermedios.
+-- scanl :: (b -> a -> b) -> b -> [a] -> [b]
+    -- Similar a foldl, pero devuelve una lista de los resultados intermedios.
+-- scanr1 :: (a -> a -> a) -> [a] -> [a]
+    -- Similar a foldr1, pero devuelve una lista de los resultados intermedios. La lista no debe ser vacía.
+-- scanl1 :: (a -> a -> a) -> [a] -> [a]
+    -- Similar a foldl1, pero devuelve una lista de los resultados intermedios. La lista no debe ser vacía.
+-- iterate :: (a -> a) -> a -> [a]
+    -- Devuelve una lista infinita donde el primer elemento es el valor dado y cada elemento siguiente es el resultado de aplicar la función al elemento anterior.
+-- repeat :: a -> [a]
+    -- Devuelve una lista infinita donde todos los elementos son el valor dado.
+-- replicate :: Int -> a -> [a]
+    -- Devuelve una lista con el valor dado repetido n veces.
+-- cycle :: [a] -> [a]
+    -- Devuelve una lista infinita que repite la lista dada.
+-- splitAt :: Int -> [a] -> ([a], [a])
+    -- Divide la lista en dos partes en el índice dado, devolviendo un par de listas.
+-- takeWhile :: (a -> Bool) -> [a] -> [a]
+    -- Devuelve los elementos iniciales de la lista que cumplen con la condición dada, hasta que se encuentra un elemento que no la cumple.
+-- dropWhile :: (a -> Bool) -> [a] -> [a]
+    -- Devuelve la lista sin los elementos iniciales que cumplen con la condición dada, comenzando desde el primer elemento que no la cumple.
+-- map :: (a -> b) -> [a] -> [b]
+    -- Aplica una función a cada elemento de una lista, devolviendo una nueva lista con los resultados.
+-- filter :: (a -> Bool) -> [a] -> [a]
+    -- Devuelve una lista con los elementos que cumplen con la condición dada.
+-- span :: (a -> Bool) -> [a] -> ([a], [a])
+    -- Divide la lista en dos partes: la primera contiene los elementos iniciales que cumplen con la condición dada, y la segunda contiene el resto de la lista.
+-- break :: (a -> Bool) -> [a] -> ([a], [a])
+    -- Similar a span, pero la primera parte contiene los elementos iniciales que no cumplen con la condición dada, y la segunda contiene el resto de la lista.
+-- lines :: String -> [String]
+    -- Divide una cadena de texto en una lista de líneas, separando por saltos de línea.
+-- words :: String -> [String]
+    -- Divide una cadena de texto en una lista de palabras, separando por espacios en blanco.
+-- unlines :: [String] -> String
+    -- Concatena una lista de líneas en una sola cadena de texto, insertando saltos de línea entre ellas.
+-- unwords :: [String] -> String
+    -- Concatena una lista de palabras en una sola cadena de texto, insertando espacios en blanco entre ellas.
+-- nub :: (Eq a) => [a] -> [a]
+    -- Elimina los elementos duplicados de una lista, conservando el orden de aparición.
+-- delete :: (Eq a) => a -> [a] -> [a]
+    -- Elimina la primera ocurrencia del elemento dado en la lista.
+-- union :: (Eq a) => [a] -> [a] -> [a]
+    -- Devuelve la unión de dos listas, eliminando los elementos duplicados.
+-- intersect :: (Eq a) => [a] -> [a] -> [a]
+    -- Devuelve la intersección de dos listas, es decir, los elementos que aparecen en ambas listas.
+-- (\\) :: (Eq a) => [a] -> [a] -> [a]
+    -- Devuelve la diferencia de dos listas, es decir, los elementos que aparecen en la primera lista pero no en la segunda.
+-- subsequences :: [a] -> [[a]]
+    -- Devuelve una lista de todas las subsecuencias posibles de la lista dada.
+-- permutations :: [a] -> [[a]]
+    -- Devuelve una lista de todas las permutaciones posibles de la lista dada.
+-- foldMap :: (Foldable t, Monoid m) => (a -> m) -> t a -> m
+    -- Aplica una función a cada elemento de la lista y combina los resultados usando la operación monoidal.
+-- mconcat :: (Foldable t, Monoid m) => t m -> m
+    -- Combina todos los elementos de la lista usando la operación monoidal.
+-- sequenceA :: (Traversable t, Applicative f) => t (f a) -> f (t a)
+    -- Transforma una estructura de datos que contiene valores en un contexto aplicativo en un contexto aplicativo que contiene una estructura de datos.
+-- mapM :: (Monad m, Traversable t) => (a -> m b) -> t a -> m (t b)
+    -- Similar a sequenceA, pero para mónadas. Aplica una función monádica a cada elemento de la lista y combina los resultados en una sola mónada.
+-- forM :: (Monad m, Traversable t) => t a -> (a -> m b) -> m (t b)
+    -- Similar a mapM, pero con los argumentos en orden inverso.
+-- replicateM :: (Monad m) => Int -> m a -> m [a]
+    -- Ejecuta una acción monádica n veces y devuelve una lista con los resultados.
+-- when :: (Applicative f) => Bool -> f () -> f ()
+    -- Ejecuta una acción en un contexto aplicativo si la condición es True, de lo contrario no hace nada.
+-- unless :: (Applicative f) => Bool -> f () -> f ()
+    -- Similar a when, pero ejecuta la acción si la condición es False.
+
+
+
+-- CHANGELOG:
+    -- Termino ejercicio 1.
+    -- Agrego más funciones a la lista.
+    -- Corregí algunos tipos y descripciones.
+    -- Reescribí todas las descripciones para que sean más claras y concisas.
+--------------------------------------------------------------------------------
