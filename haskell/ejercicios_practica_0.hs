@@ -132,7 +132,68 @@
 -- unless :: (Applicative f) => Bool -> f () -> f ()
     -- Similar a when, pero ejecuta la acción si la condición es False.
 
+--------------------------------------------------------------------------------
+-- 2. Definir las siguientes funciones:
+--------------------------------------------------------------------------------
 
+valorAbsoluto :: Float -> Float -- que dado un número devuelve su valor absoluto.
+valorAbsoluto = undefined
+
+bisiesto :: Int -> Bool -- que dado un número que representa un año, indica si el mismo es bisiesto.
+bisiesto = undefined
+
+factorial :: Int -> Int -- definida únicamente para enteros positivos, que computa el factorial.
+factorial = undefined
+
+cantDivisoresPrimos :: Int -> Int -- que dado un entero positivo devuelve la cantidad de divisores primos.
+cantDivisoresPrimos = undefined
+
+--------------------------------------------------------------------------------
+-- 3. Contamos con los tipos Maybe y Either definidos como sigue:
+    -- data Maybe a = Nothing | Just a
+    -- data Either a b = Left a | Right b
+-- Definir las siguientes funciones:
+--------------------------------------------------------------------------------
+
+inverso :: Float -> Maybe Float -- que dado un número devuelve su inverso multiplicativo si está definido, o Nothing en caso contrario.
+inverso = undefined
+
+
+aEntero :: Either Int Bool -> Int -- que convierte a entero una expresión que puede ser booleana o entera. En el caso de los booleanos, el entero que corresponde es 0 para False y 1 para True.
+aEntero = undefined
+
+
+
+--------------------------------------------------------------------------------
+-- 4. Definir las siguientes funciones sobre listas:
+--------------------------------------------------------------------------------
+
+limpiar :: String -> String -> String -- que elimina todas las apariciones de cualquier carácter de la primera cadena en la segunda. Por ejemplo, limpiar ‘‘susto’’ ‘‘puerta’’ evalúa a ‘‘pera’’. Nota: String es un renombre de [Char]. La notación ‘‘hola’’ es equivalente a [‘h’,‘o’,‘l’,‘a’] y a ‘h’:‘o’:‘l’:‘a’:[].
+limpiar = undefined
+
+difPromedio :: [Float] -> [Float] -- que dada una lista de números devuelve la diferencia de cada uno con el promedio general. Por ejemplo, difPromedio [2, 3, 4] evalúa a [-1, 0, 1].
+difPromedio = undefined
+
+todosIguales :: [Int] -> Bool -- que indica si una lista de enteros tiene todos sus elementos iguales.
+todosIguales = undefined
+
+
+--------------------------------------------------------------------------------
+-- 5. Dado el siguiente modelo para árboles binarios:
+    -- data AB a = Nil | Bin (AB a) a (AB a)
+-- definir las siguientes funciones:
+--------------------------------------------------------------------------------
+
+data AB a = Nil | Bin (AB a) a (AB a) deriving (Show, Eq)
+
+vacioAB :: AB a -> Bool -- que indica si un árbol es vacío (i.e. no tiene nodos).
+vacioAB = undefined
+
+negacionAB :: AB Bool -> AB Bool -- que dado un árbol de booleanos construye otro formado por la negación de cada uno de los nodos.
+negacionAB = undefined
+
+productoAB :: AB Int -> Int -- que calcula el producto de todos los nodos del árbol.
+productoAB = undefined
 
 -- CHANGELOG:
     -- Termino ejercicio 1.
@@ -140,3 +201,5 @@
     -- Corregí algunos tipos y descripciones.
     -- Reescribí todas las descripciones para que sean más claras y concisas.
 --------------------------------------------------------------------------------
+    -- Agrego el resto de enunciados de la práctica 0 y se las deja listas para implementar.
+    
