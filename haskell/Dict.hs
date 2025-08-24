@@ -1,15 +1,18 @@
 module Dict where
 
 import Data.Maybe (Maybe(Nothing))
-import Abb
+import Abb (ABB(Nil), insertar, buscar)
 
 newtype Entry k v = Entry (k, v) deriving Show
 
 instance Eq k => Eq (Entry k v) where
-Entry (k1, _) == Entry (k2, _) = k1 Prelude.== k2 
+    (==) :: Eq k => Entry k v -> Entry k v -> Bool
+    (==) (Entry (k1, _)) (Entry (k2, _)) = k1 Prelude.== k2
 
 instance Ord k => Ord (Entry k v) where
-compare (Entry (k1, _)) (Entry (k2, _)) = Prelude.compare k1 k2
+    compare :: Ord k => Entry k v1 -> Entry k v2 -> Ordering
+    compare (Entry (k1, _)) (Entry (k2, _)) = compare k1 k2
+    -- or define (<), (<=), (>) and (>=) directly
 
 newtype Dict k v = CDict (ABB (Entry k v)) deriving Show
 
@@ -40,3 +43,4 @@ buscar k (CDict abb) =
 -- 10. Uso de `Ord` para permitir la ordenación de las entradas en el ABB
 -- 11. Uso de `Eq` para permitir la comparación de las entradas en el ABB
 -- 12. Uso de `Data.Maybe` para manejar el caso de que una clave no exista en el diccionario
+-- 13. Cambio la implementación de Eq y Ord de mi nuevo datatype Entry
