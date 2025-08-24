@@ -1,4 +1,5 @@
 import Data.List
+
 factorial :: Int -> Int -- dado un entero n ≥ 0, devuelve n!.
 factorial 0 = 1
 factorial 1 = 1
@@ -28,8 +29,23 @@ apareceGen c (x:xs)
 --     where
 --         valorMinimo = minimum xs
 
+
+subsecuencias :: [a] -> [[a]] -- que dada una lista, devuelva la lista de todas sus posibles subsecuencias. 
+subsecuencias [] = [[]]
+subsecuencias (x:xs) = let subs = subsecuencias xs in subs ++ map (x:) subs 
+
+-- Por ejemplo, las subsecuencias de [1, 2, 3] son:
+-- ~> [[], [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]
+
+permutaciones :: [a] -> [[a]] -- que dada una lista, devuelva la lista de todas sus posibles permutaciones.
+permutaciones = undefined
+-- Por ejemplo, las permutaciones de [1, 2, 3] son:
+-- ~>   [[1, 2, 3], [1, 3, 2], [2, 1, 3]
+--       [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+
+
 -------------------------------------------------------------
--- TDAs:
+-- TDAs: Structs y Enums
 -------------------------------------------------------------
 
 data Direccion = Norte | Este | Sur | Oeste deriving Show
@@ -43,5 +59,6 @@ opuesta Oeste = Este
 
 -- data Maybe a = Nothing | Just a
 
--- ultimoIndiceDe :: Eq a => a -> [a] -> Maybe Int
+ultimoIndiceDe :: Eq a => a -> [a] -> Maybe Int
+ultimoIndiceDe = undefined
 
