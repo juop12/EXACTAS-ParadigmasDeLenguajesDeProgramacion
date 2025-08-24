@@ -44,6 +44,28 @@ buscar (Bin izq raiz der) valor
     | raiz < valor = buscar der valor
     | raiz == valor = Just raiz
 
+mapABB :: (Ord a, Ord b) => (a -> b) -> ABB a -> ABB b
+mapABB _ Nil = Nil
+mapABB f (Bin izq raiz der) = Bin (mapABB f izq) (f raiz) (mapABB f der)
+
+foldABB :: (Ord a) => (a -> b -> b) -> b -> ABB a -> b
+foldABB _ i Nil = i
+foldABB f i (Bin izq raiz der) = f raiz (foldABB f (foldABB f i izq) der)
+
+-- factorial 5
+-- abb2 = (Bin (Bin Nil 2 (Bin Nil 1 Nil)) 3 (Bin (Bin Nil 4 Nil) 5 Nil))
+-- factorial 5 ~> foldABB (*) 1 abb2 ~> 120
+
+-- abb1 = (Bin (Bin Nil 0 (Bin Nil 1 Nil)) 3 (Bin (Bin Nil 4 Nil) 5 Nil))
+-- foldABB (+) 0 abb1 ~> 13
+
+-- (Bin (Bin Nil 0 (Bin Nil 1 Nil)) 3 (Bin (Bin Nil 4 Nil) 5 Nil))
+-- foldABB (+) 0 (Bin Nil 1 Nil)) 
+-- ~> (+) 1 (foldABB (+) (foldABB (+) 0 Nil) Nil)
+-- ~> (+) 1 (foldABB (+) (0) Nil)
+-- ~> (+) 1 (0)
+-- ~> 1
+
 arrayToABB :: (Ord a) => [a] -> ABB a
 arrayToABB = foldl insertar Nil
 
@@ -70,3 +92,5 @@ postorder (Bin izq raiz der) = postorder izq ++ (postorder der ++ [raiz])
     -- Mejoro el TDA haciendo que al buscar reemplazar el nodo a eliminar con el predecesor inorder, con 1 sola busqueda se pueda actualizar el arbol Izq eliminando correctamente el precedesor inorder de este y conseguir el valor del predecesor inorder.
     -- Agrego la funcion buscar, que devuelve un Maybe a.
     -- Agrego función para convertir un array en un ABB usando foldl.
+    -- Agrego funciones para hacer un map de los elementos del ABB.
+    -- Agrego funciones para hacer un fold/reduce de los elementos del ABB.
