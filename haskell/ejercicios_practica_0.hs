@@ -200,13 +200,18 @@ todosIguales (x:xs) = all (== x) xs
 data AB a = Nil | Bin (AB a) a (AB a) deriving (Show, Eq)
 
 vacioAB :: AB a -> Bool -- que indica si un árbol es vacío (i.e. no tiene nodos).
-vacioAB = undefined
+vacioAB Nil = True
+vacioAB (Bin {}) = False 
 
+-- Generalizo en un mapAB en ABB
 negacionAB :: AB Bool -> AB Bool -- que dado un árbol de booleanos construye otro formado por la negación de cada uno de los nodos.
-negacionAB = undefined
+negacionAB Nil = Nil
+negacionAB (Bin izq raiz der) = Bin (negacionAB izq) (not raiz) (negacionAB der)
 
+-- Generalizo en un foldAB en ABB
 productoAB :: AB Int -> Int -- que calcula el producto de todos los nodos del árbol.
-productoAB = undefined
+productoAB Nil = 1
+productoAB (Bin izq raiz der) = productoAB izq * raiz * productoAB der
 
 -- CHANGELOG:
     -- Termino ejercicio 1.
@@ -219,3 +224,4 @@ productoAB = undefined
     -- Arreglo ejercicio 2. Ahora cuenta a 1 en el conjunto de divisores primos ya que esPrimo no estaba tomando 1 como primo.
     -- Termino ejercicio 3. Ahora entiendo el Either, el Maybe es un Option de Rust.
     -- Termino ejercicio 4. Utilizo varias funciones definidas para listas.
+    -- Termino ejercicio 5. Trata de recorrer el arbol.
