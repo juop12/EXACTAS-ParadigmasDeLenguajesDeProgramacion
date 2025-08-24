@@ -177,13 +177,18 @@ aEntero (Right boolean) = if boolean then 1 else 0
 --------------------------------------------------------------------------------
 
 limpiar :: String -> String -> String -- que elimina todas las apariciones de cualquier carácter de la primera cadena en la segunda. Por ejemplo, limpiar ‘‘susto’’ ‘‘puerta’’ evalúa a ‘‘pera’’. Nota: String es un renombre de [Char]. La notación ‘‘hola’’ es equivalente a [‘h’,‘o’,‘l’,‘a’] y a ‘h’:‘o’:‘l’:‘a’:[].
-limpiar = undefined
+limpiar _ [] = []
+limpiar filtro (x:xs) = if x `elem` filtro then limpiar filtro xs else x : limpiar filtro xs
 
 difPromedio :: [Float] -> [Float] -- que dada una lista de números devuelve la diferencia de cada uno con el promedio general. Por ejemplo, difPromedio [2, 3, 4] evalúa a [-1, 0, 1].
-difPromedio = undefined
+difPromedio lista = map diferencia lista
+    where 
+        promedio = sum lista / fromIntegral (length lista)
+        diferencia x = x - promedio
 
 todosIguales :: [Int] -> Bool -- que indica si una lista de enteros tiene todos sus elementos iguales.
-todosIguales = undefined
+todosIguales (x:xs) = all (== x) xs
+
 
 
 --------------------------------------------------------------------------------
@@ -213,3 +218,4 @@ productoAB = undefined
     -- Termino ejercicio 2.
     -- Arreglo ejercicio 2. Ahora cuenta a 1 en el conjunto de divisores primos ya que esPrimo no estaba tomando 1 como primo.
     -- Termino ejercicio 3. Ahora entiendo el Either, el Maybe es un Option de Rust.
+    -- Termino ejercicio 4. Utilizo varias funciones definidas para listas.
