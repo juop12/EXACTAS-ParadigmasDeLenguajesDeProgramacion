@@ -1,6 +1,6 @@
 import Data.List (delete)
 
-newtype Conj a = CConj [a]
+newtype Conj a = CConj [a] deriving Show
 
 vacio :: Conj a
 vacio = CConj []
