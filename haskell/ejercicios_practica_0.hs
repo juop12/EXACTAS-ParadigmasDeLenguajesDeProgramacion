@@ -189,8 +189,6 @@ difPromedio lista = map diferencia lista
 todosIguales :: [Int] -> Bool -- que indica si una lista de enteros tiene todos sus elementos iguales.
 todosIguales (x:xs) = all (== x) xs
 
-
-
 --------------------------------------------------------------------------------
 -- 5. Dado el siguiente modelo para árboles binarios:
     -- data AB a = Nil | Bin (AB a) a (AB a)
