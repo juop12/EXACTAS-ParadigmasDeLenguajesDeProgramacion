@@ -31,6 +31,10 @@
 
 -- Extra hecho por Copilot con el formato que empece previamente:
 
+-- take :: Int -> [a] -> [a]
+    -- Devuelve los primeros n elementos de una lista.
+-- drop :: Int -> [a] -> [a]
+    -- Devuelve la lista sin sus primeros n elementos.
 -- notElem :: (Foldable t, Eq a) => a -> t a -> Bool
     -- Devuelve True si el elemento no pertenece a la lista, False en caso contrario.
 -- zip :: [a] -> [b] -> [(a, b)]
