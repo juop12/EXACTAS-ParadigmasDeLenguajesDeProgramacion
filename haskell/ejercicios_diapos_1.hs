@@ -172,12 +172,39 @@ uncurry = undefined
 -- Ordenar
 -------------------------------------------------------------
 
--- ordenar :: Ord a => [a] -> [a] -- dada una lista, devuelve su permutacion ordenada.
+selectionSort :: Ord a => [a] -> [a] -- dada una lista, devuelve su permutacion ordenada.
+selectionSort [] = []
+selectionSort xs = let m = minimum xs in m : selectionSort (remove m xs)
+  where
+    remove _ [] = []
+    remove y (z:zs)
+      | y == z    = zs
+      | otherwise = z : remove y zs
 
--- ordenar [] = []
--- ordenar (x:xs)
---     | x <= valorMinimo = x : ordenar xs
---     | otherwise = valorMinimo : ordenar (x : delete valorMinimo xs)
---     where
---         valorMinimo = minimum xs
+bubbleSort :: Ord a => [a] -> [a] -- dada una lista, devuelve su permutacion ordenada.
+bubbleSort xs = case bubble xs of
+                  (ys, False) -> ys
+                  (ys, True)  -> bubbleSort ys
+  where
+    bubble [] = ([], False)
+    bubble [y] = ([y], False)
+    bubble (y1:y2:ys)
+      | y1 > y2   = let (zs, swapped) = bubble (y1:ys) in (y2:zs, True)
+      | otherwise = let (zs, swapped) = bubble (y2:ys) in (y1:zs, swapped)
 
+insertionSort :: Ord a => [a] -> [a] -- dada una lista, devuelve su permutacion ordenada.
+insertionSort [] = []
+insertionSort (x:xs) = insert x (insertionSort xs)
+  where
+    insert y [] = [y]
+    insert y (z:zs)
+      | y <= z    = y : z : zs
+      | otherwise = z : insert y zs
+
+quickSort :: Ord a => [a] -> [a] -- dada una lista, devuelve su permutacion ordenada.
+quickSort [] = []
+quickSort (x:xs) = let menores = Prelude.filter (< x) xs
+                       mayores = Prelude.filter (>= x) xs 
+                    in quickSort menores ++ [x] ++ quickSort mayores 
+
+-- quickSort (x:xs) = quickSort [y | y <- xs, y < x] ++ [x] ++ quickSort [y | y <- xs, y >= x]
