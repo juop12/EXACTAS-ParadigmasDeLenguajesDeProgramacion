@@ -163,10 +163,10 @@ map f = foldr (\x r -> f x : r) []
 -------------------------------------------------------------
 
 curry :: ((a,b) -> c) -> (a -> b -> c) -- que devuelve la version currificada de una funcion no currificada.
-curry = undefined
+curry f v1 v2 = f (v1, v2)
 
 uncurry :: (a -> b -> c) -> ((a,b) -> c) -- que devuelve la vbersion no currificada de una funcion currificada. Los parentesis de la segunda funcion no son necesarios.
-uncurry = undefined
+uncurry f (v1, v2) = f v1 v2 
 
 -------------------------------------------------------------
 -- Ordenar
